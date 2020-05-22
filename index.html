@@ -10,8 +10,11 @@
     <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
     <script src="scripts/main.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap" rel="stylesheet">
   </head>
   <body>
+    <h1 id="waitH1" style="font-family: 'Chelsea Market'; text-align: center; color: white; font-size: 40px; z-index: 999999; margin-left: 35%; margin-top: 100px; position: absolute; display:block;">Don't click until everything is loaded!</h1>
+    <h1 id="timerH1" style="font-family: 'Chelsea Market'; text-align: center; color: white; font-size: 40px; z-index: 999999; margin-left: 40%; margin-top: 100px; position: absolute; display:none;">Time left to escape: <span style="color: white; font-size: 40px;" id="timer">2:38</span></h1>
     <a-scene  inspector-plugin-recast physics="debug: false" background="color: #333333">
       <a-assets>
 <!--             <a-asset-item id="maze" src="assets/mazenew.obj"></a-asset-item> -->
@@ -41,6 +44,8 @@
     </a-entity>
   </a-entity>
 </a-entity>
+
+
 
 <a-entity teleport-controls="hitEntity: [nav-mesh];"
           vive-controls="hand: left;"></a-entity>
