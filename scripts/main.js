@@ -1,5 +1,5 @@
 document.onclick = function(){
-var audio = new Audio('../assets/music.mp3');
+var audio = new Audio('..assets/music.mp3');
 audio.play();
 }
 // var camera = document.getElementById("camera");
