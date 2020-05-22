@@ -14,8 +14,8 @@
   <body>
     <a-scene  inspector-plugin-recast physics="debug: true" background="color: #333333">
       <a-assets>
-            <a-asset-item id="maze" src="/assets/mazenew.obj"></a-asset-item>
-            <a-asset-item id="welcome" src="/assets/objWelcome.obj"></a-asset-item>
+<!--             <a-asset-item id="maze" src="/assets/mazenew.obj"></a-asset-item> -->
+    <!--         <a-asset-item id="welcome" src="/assets/objWelcome.obj"></a-asset-item> -->
 <!--             <a-asset-item response-type="arraybuffer" id="lights" src="/assets/lights.gltf"></a-asset-item>
             <a-asset-item response-type="arraybuffer" id="rustsigns" src="/assets/rustsigns.gltf"></a-asset-item>
             <a-asset-item response-type="arraybuffer" id="chairs" src="/assets/chairs.gltf"></a-asset-item>
@@ -30,8 +30,8 @@
             <a-asset-item id="fence" src="/assets/fence.obj"></a-asset-item>
             <a-asset-item id="fencemtl" src="/assets/fence.mtl"></a-asset-item>
             <a-asset-item response-type="arraybuffer" id="door" src="/assets/door.gltf"></a-asset-item> -->
-            <img id="metal" src="/assets/metal.jpg">
-            <img id="sky" src="/images/sky.jpg">
+<!--             <img id="metal" src="/assets/metal.jpg">
+            <img id="sky" src="/images/sky.jpg"> -->
       </a-assets>
 
   <a-entity id="rig" kinematic-body position="2.98 2 -16.25" rotation="0 -172.4602963343782 0"  movement-controls="constrainToNavMesh: true; speed:  0.15;" radius="0.0001">
@@ -47,8 +47,8 @@
           <a-entity nav-mesh static-body position="0 2.14552 0" gltf-model="/assets/navmesh.gltf" visible="false"></a-entity>
 
       <a-grid static-body position="0 0 0" geometry="width: 150; height: 150" material="visible: false; color: #3a3a3a" velocity=""></a-grid>
-      <a-sky position="0 200 0" src="#sky"></a-sky>
-      <a-entity  position="0 0 0" obj-model="obj: #maze; mtl:/assets/mazenew.mtl" ></a-entity>
+      <a-sky position="0 200 0" src="/images/sky.jpg"></a-sky>
+      <a-entity  position="0 0 0" obj-model="obj: /assets/mazenew.obj; mtl:/assets/mazenew.mtl" ></a-entity>
       <a-entity position="3.4574 2.10206 -12.35597" gltf-model="/assets/gltfWelcome.gltf" scale="0.16 0.2 0.1" rotation="0 -100 0"></a-entity>
       <a-entity position="1.59662 2.10206 -15.99551" obj-model="obj: /assets/stop-sign-ts.obj; mtl: /assets/stop-sign-ts.mtl" scale="" rotation="0 140 0"></a-entity>
       <a-entity position="-1.2277 2.2336 4.75988" gltf-model="/assets/getout.gltf" scale="10 10 10" rotation=""></a-entity>
