@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ARVR Challenge - David Achtsivassilis 18134017</title>
+    <meta name="viewport" content="width=device-width">
+    <script data-cfasync="false" src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+    <script src="scripts/main.js" defer></script>
+  </head>
+  <body>
+    <a-scene  inspector-plugin-recast physics="debug: true" background="color: #333333">
+      <a-assets>
+            <a-asset-item id="maze" src="/assets/mazenew.obj"></a-asset-item>
+            <a-asset-item id="welcome" src="/assets/objWelcome.obj"></a-asset-item>
+<!--             <a-asset-item response-type="arraybuffer" id="lights" src="/assets/lights.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="rustsigns" src="/assets/rustsigns.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="chairs" src="/assets/chairs.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="cone" src="/assets/cone.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="paaltjes" src="/assets/paaltjes.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="lantaarn2" src="/assets/lantaarn2.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="lantaarn" src="/assets/lantaarn.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="signrechts" src="/assets/signrechts.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="rock" src="/assets/rock.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="hout" src="/assets/hout.gltf"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="barrel" src="/assets/barrel.gltf"></a-asset-item>
+            <a-asset-item id="fence" src="/assets/fence.obj"></a-asset-item>
+            <a-asset-item id="fencemtl" src="/assets/fence.mtl"></a-asset-item>
+            <a-asset-item response-type="arraybuffer" id="door" src="/assets/door.gltf"></a-asset-item> -->
+            <img id="metal" src="/assets/metal.jpg">
+            <img id="sky" src="/images/sky.jpg">
+      </a-assets>
+
+  <a-entity id="rig" kinematic-body position="2.98 2 -16.25" rotation="0 -172.4602963343782 0"  movement-controls="constrainToNavMesh: true; speed:  0.15;" radius="0.0001">
+    <a-entity camera id="camera" class="camera" look-controls="pointerLockEnabled: true" position="0 1.6 0" radius="0.0001" rotation="0 0 0" data-aframe-inspector-original-camera="">
+       <a-entity light="intensity: 0.69; castShadow: true; decay: 11.93; distance: 100; penumbra: 1; type: point; shadowBias: 18.16; shadowRadius: 13.63" position="0.68022 21.12976 -10.80827" data-aframe-default-light="" aframe-injected=""></a-entity>
+    </a-entity>
+  </a-entity>
+</a-entity>
+
+<a-entity teleport-controls="hitEntity: [nav-mesh];"
+          vive-controls="hand: left;"></a-entity>
+
+          <a-entity nav-mesh static-body position="0 2.14552 0" gltf-model="/assets/navmesh.gltf" visible="false"></a-entity>
+
+      <a-grid static-body position="0 0 0" geometry="width: 150; height: 150" material="visible: false; color: #3a3a3a" velocity=""></a-grid>
+      <a-sky position="0 200 0" src="#sky"></a-sky>
+      <a-entity  position="0 0 0" obj-model="obj: #maze; mtl:/assets/mazenew.mtl" ></a-entity>
+      <a-entity position="3.4574 2.10206 -12.35597" gltf-model="/assets/gltfWelcome.gltf" scale="0.16 0.2 0.1" rotation="0 -100 0"></a-entity>
+      <a-entity position="1.59662 2.10206 -15.99551" obj-model="obj: /assets/stop-sign-ts.obj; mtl: /assets/stop-sign-ts.mtl" scale="" rotation="0 140 0"></a-entity>
+      <a-entity position="-1.2277 2.2336 4.75988" gltf-model="/assets/getout.gltf" scale="10 10 10" rotation=""></a-entity>
+      <a-entity position="-0.4415 2.00979 -7.22293" gltf-model="/assets/zombie.gltf" scale="10 10 10" rotation=""></a-entity>
+      <a-entity position="20.54798 1.82741 -2.7324" gltf-model="/assets/danger.gltf" scale="10 10 10" rotation=""></a-entity>
+      <a-entity position="-3.21743 1.67236 -4.73095" gltf-model="/assets/zombies.gltf" scale="10 10 10" rotation=""></a-entity>
+      <a-entity position="15.21265 2.1092 5.31123" gltf-model="/assets/trashcan.gltf" scale="" rotation=""></a-entity>
+      <a-entity position="10.69429 2.1092 -4.47755" gltf-model="/assets/warningsign.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="2.53607 2.69108 3.06017" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-2.0913 2.68427 5.39112" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-9.72688 2.68427 5.39112" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-12.1455 2.69108 5.38204" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-9.11307 2.69108 -9.13315" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-4.8418 2.69108 -9.13315" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-4.66226 2.69108 7.84411" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="4.91959 2.69108 17.20565" gltf-model="/assets/cone.gltf" scale="0.5 0.5 0.5" rotation="0 90 0"></a-entity>
+      <a-entity position="-4.26742 2.02254 7.19739" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 14.999999999999998 0"></a-entity>
+      <a-entity position="0.4409 2.02254 9.69132" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+      <a-entity position="8.45033 2.02254 9.81323" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="5.01197 2.02254 -13.96794" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="5.29226 2.10008 0.87769" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 -90 0"></a-entity>
+      <a-entity position="-1.96905 2.02254 -0.26847" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+      <a-entity position="-4.29583 2.02254 6.91738" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 45 0"></a-entity>
+      <a-entity position="7.88024 2.10008 -6.95413" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 45 0"></a-entity>
+      <a-entity position="14.40985 2.07923 -13.90447" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="22.70759 2.07923 -6.76396" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="22.70759 2.07923 4.88942" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 45 0"></a-entity>
+      <a-entity position="20.10521 2.07923 14.7938" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 45 0"></a-entity>
+      <a-entity position="25.03934 2.07923 16.87813" obj-model="obj: /assets/fence.obj; mtl: /assets/fence.mtl" scale="0.1 0.1 0.1" rotation="0 45 0"></a-entity>
+      <a-entity position="14.79213 2.38244 13.91016" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="9.97349 2.38244 13.91016" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="9.97349 2.38244 14.61931" gltf-model="/assets/barrel.gltf" scale="" rotation="35 45 0"></a-entity>
+      <a-entity position="7.38593 2.38244 13.91016" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="7.38593 2.38244 4.2658" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="7.38593 2.38244 -2.76548" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="9.75003 2.38244 -2.76548" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="2.28115 2.38244 -2.76548" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="17.2158 2.38244 -2.76548" gltf-model="/assets/barrel.gltf" scale="" rotation="0 45 0"></a-entity>
+      <a-entity position="17.55277 2.38244 0.43238" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 45 0"></a-entity>
+      <a-entity position="19.93333 2.38244 -0.82835" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 45 0"></a-entity>
+      <a-entity position="3.1 2.38244 -10.84578" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 45 0"></a-entity>
+      <a-entity position="5.60658 2.38244 -6.61801" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 90 0"></a-entity>
+      <a-entity position="-2.3389 2.38244 -3.44689" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 90 0"></a-entity>
+      <a-entity position="0.83399 2.38244 -3.44689" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 90 0"></a-entity>
+      <a-entity position="-12.32292 2.38244 -3.44689" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 90 0"></a-entity>
+      <a-entity position="-19.64561 2.38244 -4.67025" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 90 0"></a-entity>
+      <a-entity position="-16.37184 2.38244 17.08383" gltf-model="/assets/hout.gltf" scale="0.15 0.15 0.15" rotation="0 90 0"></a-entity>
+      <a-entity position="0.61075 2.06648 -15.35616" gltf-model="/assets/door.gltf" scale="0.2 0.2 0.2" rotation="0 180 0"></a-entity>
+      <a-entity position="2.76841 2.06648 -15.50542" gltf-model="/assets/door.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="2.76841 2.01593 2.6747" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="2.49364 2.01593 6.2739" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="14.36868 2.01593 -1.65335" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="27.91785 2.01593 -1.65335" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="12.79628 2.01593 9.89868" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="12.79628 2.01593 19.56291" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="25.45555 2.01593 15.82658" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="27.92898 2.01593 19.64491" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="-19.52488 2.01593 19.64491" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="-14.43962 2.01593 -0.95242" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="-14.43962 2.01593 -14.60224" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="-4.6675 2.01593 -11.88128" gltf-model="/assets/rock.gltf" scale="0.2 0.2 0.2" rotation=""></a-entity>
+      <a-entity position="-9.1227 2.01593 -2.79602" gltf-model="/assets/signrechts.gltf" scale="" rotation="0 -90 0"></a-entity>
+      <a-entity position="0.44041 2.01593 -2.79602" gltf-model="/assets/signrechts.gltf" scale="" rotation="0 -90 0"></a-entity>
+      <a-entity position="13.21005 2.01593 -1.57392" gltf-model="/assets/signrechts.gltf" scale="" rotation="0 180 0"></a-entity>
+      <a-entity position="13.21005 2.01593 -11.56831" gltf-model="/assets/signrechts.gltf" scale="" rotation="0 180 0"></a-entity>
+      <a-entity position="27.82478 2.01593 -11.56831" gltf-model="/assets/signrechts.gltf" scale="" rotation="0 180 0"></a-entity>
+      <a-entity position="-13.35993 2.01593 -11.56831" gltf-model="/assets/signrechts.gltf" scale="" rotation="0 180 0"></a-entity>
+      <a-entity position="-13.35993 1.41001 -9.40544" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 180 0"></a-entity>
+      <a-entity position="4.56102 1.41001 -6.32552" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 180 0"></a-entity>
+      <a-entity position="27.92625 1.41001 -6.32552" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 180 0"></a-entity>
+      <a-entity position="27.92625 1.41001 16.70905" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 180 0"></a-entity>
+      <a-entity position="6.07157 1.41001 16.70905" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 180 0"></a-entity>
+      <a-entity position="-4.1742 1.41001 17.39392" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="-4.1742 1.41001 19.70023" gltf-model="/assets/lantaarn.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="9.91358 0.61968 4.2333" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="9.91358 0.61968 2.99011" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="8.22871 0.61968 0.93359" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="24.57154 0.61968 10.31316" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="-8.67442 0.61968 12.6826" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="-5.50747 0.61968 -6.56222" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="10.44629 0.61 -9.29585" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="10.44629 0.61 -13.41319" gltf-model="/assets/lantaarn2.gltf" scale="" rotation="70 90 0"></a-entity>
+      <a-entity position="10.44629 2.23559 -14.35038" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="10.44629 2.23559 -3.93101" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="10.44629 2.23559 7.95442" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="10.44629 2.23559 19.78202" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="-8.94544 2.23559 19.78202" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="-8.8468 2.23559 13.90651" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="-8.8468 2.23559 -11.9038" gltf-model="/assets/paaltjes.gltf" scale="" rotation="0 90 0"></a-entity>
+      <a-entity position="-8.8468 2.23559 -13.61111" gltf-model="/assets/chairs.gltf" scale="0.01 0.01 0.01" rotation="0 90 0"></a-entity>
+      <a-entity position="-6.40195 2.23559 -13.61111" gltf-model="/assets/chairs.gltf" scale="0.01 0.01 0.01" rotation="0 90 0"></a-entity>
+      <a-entity position="15.24249 2.23559 -6.42582" gltf-model="/assets/chairs.gltf" scale="0.01 0.01 0.01" rotation="0 90 0"></a-entity>
+      <a-entity position="17.99551 2.23559 -4.29056" gltf-model="/assets/chairs.gltf" scale="0.01 0.01 0.01" rotation="0 90 0"></a-entity>
+      <a-entity position="25.24762 2.23559 -1.77545" gltf-model="/assets/chairs.gltf" scale="0.01 0.01 0.01" rotation="0 90 0"></a-entity>
+      <a-entity position="28.00801 2.03496 4.3447" gltf-model="/assets/chairs.gltf" scale="0.01 0.01 0.01" rotation="0 90 0"></a-entity>
+      <a-entity position="22.89805 1.59387 -4.39715" gltf-model="/assets/rustsigns.gltf" scale="0.3 0.3 0.3" rotation=""></a-entity>
+      <a-entity position="22.89805 1.59387 -8.85024" gltf-model="/assets/rustsigns.gltf" scale="0.3 0.3 0.3" rotation=""></a-entity>
+      <a-entity position="4.72653 1.59387 2.78871" gltf-model="/assets/rustsigns.gltf" scale="0.3 0.3 0.3" rotation=""></a-entity>
+      <a-entity position="-2.37299 1.59387 6.496" gltf-model="/assets/rustsigns.gltf" scale="0.3 0.3 0.3" rotation=""></a-entity>
+      <a-entity position="-2.37299 1.59387 16.011" gltf-model="/assets/rustsigns.gltf" scale="0.3 0.3 0.3" rotation=""></a-entity>
+      <a-entity position="-19.93553 1.59387 7.70701" gltf-model="/assets/rustsigns.gltf" scale="0.3 0.3 0.3" rotation="0 90 0"></a-entity>
+      <a-entity position="2.29411 4.12242 -3.42764" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation="0 -90 0"></a-entity>
+      <a-entity position="11.75978 4.12242 3.07837" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="17.90146 4.12242 -8.49609" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="27.85079 4.12242 -3.38653" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+      <a-entity position="22.76683 4.12242 10.3055" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="22.76683 4.12242 19.71579" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="8.83141 4.12242 19.71579" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity position="-6.17902 4.12242 19.71579" gltf-model="/assets/lights.gltf" scale="0.1 0.1 0.1" rotation=""></a-entity>
+      <a-entity light="color: #f4b45b; intensity: 1.52; castShadow: true; angle: 61.82; groundColor: #fbb83c; distance: 0.77; penumbra: 0.51; shadowBias: 0.55" position="-0.5 15.86394 1" data-aframe-default-light="" aframe-injected=""></a-entity>
+      <a-entity light="intensity: 0.69; castShadow: true; decay: 11.93; distance: 100; penumbra: 1; type: point; shadowBias: 18.16; shadowRadius: 13.63" position="0.68022 21.12976 -10.80827" data-aframe-default-light="" aframe-injected=""></a-entity>
+    </a-scene>
+  </body>
+</html>
